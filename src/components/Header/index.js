@@ -18,16 +18,26 @@ const Header = () => {
           <li className="header-tab">
             <ul className="list-tab">
               <li className="item">
-                <NavLink to="/how">How It Works</NavLink>
+                <NavLink to="/how" activeClassName="selected">
+                  How It Works
+                </NavLink>
               </li>
               <li className="item">
-                <NavLink to="template">template</NavLink>
+                <NavLink to="/template" activeClassName="selected">
+                  template
+                </NavLink>
               </li>
               <li className="item">
-                <NavLink to="login">Login</NavLink>
+                <NavLink to="/login" activeClassName="selected">
+                  Login
+                </NavLink>
               </li>
               <li className="item">
-                <NavLink to="siginup" style={{ paddingRight: 0 }}>
+                <NavLink
+                  to="/siginup"
+                  activeClassName="selected"
+                  style={{ paddingRight: 0 }}
+                >
                   Sign up
                 </NavLink>
               </li>
