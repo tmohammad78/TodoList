@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+
+const Modal =React.lazy(()=> import('../Modal'));
+const Child = React.lazy(()=> import('../Child'));
 
 import "./Header.scss";
 
 import Logo from "../../assets/logo.svg";
 
 const Header = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+  const toggleLoginModal = () => {
+    setShowLoginModal((prevState) => {
+      return !prevState;
+    });
+  };
+  const toggleSignupModal = () => {
+    setShowSignupModal((prevState) => {
+      return !prevState;
+    });
+  };
   return (
     <div className="header clearfix ">
       <div className="wrapper clearfix">
@@ -28,18 +43,33 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="item">
-                <NavLink to="/login" activeClassName="selected">
+                <NavLink
+                  to="/login"
+                  activeClassName="selected"
+                  onClick={toggleLoginModal}
+                >
                   Login
                 </NavLink>
+                {showLoginModal ? (
+                  <Modal>
+                    <Child toggleModal={toggleLoginModal} sectionModal='login' />
+                  </Modal>
+                ) : null}
               </li>
               <li className="item">
                 <NavLink
                   to="/siginup"
                   activeClassName="selected"
                   style={{ paddingRight: 0 }}
+                  onClick={toggleSignupModal}
                 >
                   Sign up
                 </NavLink>
+                {showSignupModal  ? (
+                  <Modal>
+                    <Child toggleModal={toggleSignupModal} sectionModal='signup' />
+                  </Modal>
+                ) : null}
               </li>
             </ul>
           </li>

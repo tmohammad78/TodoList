@@ -1,0 +1,45 @@
+.parent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2140;
+  color: #333;
+  .modalBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    z-index: 2000;
+    border-radius: 5px;
+
+    .ancBox {
+      padding: 5px 0px;
+      .img {
+        cursor: pointer;
+        font-weight: 300;
+        width: 15px;
+        display: inline-block;
+        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        -webkit-transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+
+  .lightBox {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  }
+}

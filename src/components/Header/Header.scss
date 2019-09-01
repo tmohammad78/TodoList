@@ -39,7 +39,7 @@
             }
             &:hover,
             &.selected {
-              color: darken($color:#9b9b9b , $amount: 70%);
+              color: darken($color: #9b9b9b, $amount: 70%);
               &::before {
                 transform: scale(1);
               }
