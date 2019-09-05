@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const Modal =React.lazy(()=> import('../Modal'));
-const Child = React.lazy(()=> import('../Child'));
+const Portal = React.lazy(() => import("../Portal"));
+const Login = React.lazy(() => import("../Portal/Login"));
+const Signup = React.lazy(() => import("../Portal/Signup"));
 
 import "./Header.scss";
 
@@ -44,32 +45,46 @@ const Header = () => {
               </li>
               <li className="item">
                 <NavLink
-                  to="/login"
+                  to={{
+                    pathname:'/login',
+                    state:{
+                      modal:true
+                    } 
+                  }}
                   activeClassName="selected"
                   onClick={toggleLoginModal}
                 >
                   Login
                 </NavLink>
-                {showLoginModal ? (
-                  <Modal>
-                    <Child toggleModal={toggleLoginModal} sectionModal='login' />
-                  </Modal>
-                ) : null}
+                {/* {showLoginModal ? (
+                  <Portal>
+                    <Modal toggleModal={toggleLoginModal}>
+                      <Login />
+                    </Modal>
+                  </Portal>
+                ) : null} */}
               </li>
               <li className="item">
                 <NavLink
-                  to="/siginup"
+                  to={{
+                    pathname:'/signup',
+                    state:{
+                      modal:true
+                    }
+                  }}
                   activeClassName="selected"
                   style={{ paddingRight: 0 }}
                   onClick={toggleSignupModal}
                 >
                   Sign up
                 </NavLink>
-                {showSignupModal  ? (
-                  <Modal>
-                    <Child toggleModal={toggleSignupModal} sectionModal='signup' />
-                  </Modal>
-                ) : null}
+                {/* {showSignupModal ? (
+                  <Portal>
+                    <Modal toggleModal={toggleSignupModal}>
+                      <Signup />
+                    </Modal>
+                  </Portal>
+                ) : null} */}
               </li>
             </ul>
           </li>

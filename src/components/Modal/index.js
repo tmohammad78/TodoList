@@ -1,21 +1,34 @@
-import React  , { useEffect } from "react";
-import ReactDOM from 'react-dom';
+import React from "react";
+import  { withRouter } from 'react-router-dom';
 
-import "./modal.scss";
+import Cancel from "../../assets/cancel.svg";
+import "./Modal.scss";
 
-const Modal = (props) => {
-  const modalRoot=document.getElementById('modal-root');
-  const el = document.createElement("div");
+const Modal = ({children,history}) => {
 
-  useEffect(()=>{
+  const closeModal = ()=>{
+    history.goBack();
+  }
 
-    modalRoot.appendChild(el);
-    return function cleanup(){
-        modalRoot.removeChild(el);
-    }
-  });
-
-  return ReactDOM.createPortal(props.children, el);
+  return (
+    <div className="parent">
+      <div className="modalBox">
+        <div className="wrapper">
+          <div className="ancBox">
+            <div className="img" onClick={closeModal} >
+              <Cancel />
+            </div>
+          </div>
+          <div className="operation">
+            {children}
+          </div>
+        </div>
+      </div>
+      <div className="lightBox" onClick={closeModal}></div>
+    </div>
+  );
 };
+export default withRouter(Modal);
 
-export default Modal;
+
+//onClick={props.toggleModal}
