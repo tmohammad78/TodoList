@@ -34,8 +34,8 @@ export const auth = (email, pass, name) => {
           apiData
         )
         .then((response) => {
-          dispatch(authSuccess(response.data));
           console.log(response);
+          dispatch(authSuccess(response.data));
         })
         .catch((error) => {
           console.log(error.response.data.error);

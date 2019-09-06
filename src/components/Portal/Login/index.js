@@ -1,7 +1,10 @@
-import React , {useState} from "react";
-import './Login.scss';
+import React, { useState } from "react";
+
+const Button = React.lazy(() => import("../../Button"));
+import "./Login.scss";
 
 const Login = () => {
+  let disabled = "disabled";
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [emailfocused, setEmailfocused] = useState(false);
@@ -33,6 +36,8 @@ const Login = () => {
     });
   };
 
+  email && pass ? "" : "disabled";
+
   return (
     <div>
       <div className={`inputValue ${emailfocused ? "focused " : ""} `}>
@@ -60,6 +65,11 @@ const Login = () => {
           onFocus={togglePassClass}
           onBlur={togglePassClass}
         />
+      </div>
+      <div className="buttonBox">
+        <Button className={`btn btn-primary btn-md `} disabled={disabled}>
+          Log in
+        </Button>
       </div>
     </div>
   );

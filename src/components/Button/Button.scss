@@ -1,0 +1,78 @@
+$transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+$color-gray-light: #ccc;
+$primary-color: #e64e40;
+
+@mixin btn-base() {
+  font-family: "Graphik Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  display: inline-block;
+  color: #ffffff;
+  line-height: 1;
+  outline: 0;
+  text-decoration: none;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  overflow: hidden;
+  transition: $transition;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+@mixin bgcolor($bg: $primary-color) {
+  background-color: $bg;
+
+  &:hover {
+    background-color: darken($bg, 10%);
+  }
+  &:disabled {
+    background-color: $color-gray-light;
+  }
+}
+
+@mixin btn() {
+  @include btn-base();
+  text-align: center;
+  padding: 8px 20px;
+  border-radius: 5px;
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+
+[class^="btn-"],
+[class*="btn-"] {
+  @include btn();
+}
+
+.btn-primary {
+  position: relative;
+  @include bgcolor($primary-color);
+//   &:before {
+//     content: "";
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     right: 0;
+//     left: 0;
+//     background-color: #3e3d3d30;
+//     transform: translateX(-100%);
+//   }
+//   &:hover {
+//     &:before {
+//       transform: translateX(0);
+//     }
+//   }
+  // color: white;
+}
+.btn-md {
+  padding: 15px 60px;
+}
+
+.buttonBox{
+    padding: 25px 0;
+    text-align: center;
+}
