@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Button";
 
 import { auth } from "../../../services/auth/action";
@@ -10,11 +10,19 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [Name, setName] = useState("");
-  const [errorMessage, setErrorMessage] = useState([]);
   const [result, setResult] = useState({
-    name: true,
-    email: true,
-    pass: true
+    name: {
+      validate: false,
+      message: ""
+    },
+    email: {
+      validate: false,
+      message: ""
+    },
+    pass: {
+      validate: false,
+      message: ""
+    }
   });
   const [disabled, setDisabled] = useState("");
   const [emailfocused, setEmailfocused] = useState(false);
@@ -22,22 +30,36 @@ const Signup = () => {
   const [namefocused, setNamefocused] = useState(false);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("effectstate", result);
+    if (result.name.validate && result.email.validate && result.pass.validate) {
+      // setDisabled("");
+      dispatch(auth(email, pass, Name));
+    }
+  }, [result]);
+
   const emailHandler = (e) => {
-    // console.log(result);
-    // result ? setEmail(e.target.value) : null;
     setEmail(e.target.value);
   };
 
   const validation = (Name, email, pass) => {
     let emailVal = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let nameVal = /^[a-zA-Z]+$/;
-
-    // if (Name) {
-    // }
     const nameResult = nameVal.test(Name);
     const emailResult = emailVal.test(email);
     const passResult = pass.length > 6 ? true : false;
-    const result = [nameResult, emailResult, passResult];
+    const result = [
+      { validate: nameResult, message: !nameResult ? "incorrect" : null },
+      {
+        validate: emailResult,
+        message: !emailResult ? "Email is incorrect" : null
+      },
+      {
+        validate: passResult,
+        message: !passResult ? "Password should be more than 6" : null
+      }
+    ];
 
     return result;
   };
@@ -78,40 +100,23 @@ const Signup = () => {
     });
   };
 
-  const checkAuth = (email, pass, Name) => {
-    dispatch(auth(email, pass, Name));
-  };
-
   const Operation = () => {
     const Result = validation(Name, email, pass);
-    console.log("validate", Result[1]);
-    console.log("before state", result.name);
     setResult({
-      name: Result[0],
-      email: Result[1],
-      pass: Result[2]
+      name: {
+        validate: Result[0].validate,
+        message: Result[0].message
+      },
+      email: {
+        validate: Result[1].validate,
+        message: Result[1].message
+      },
+      pass: {
+        validate: Result[2].validate,
+        message: Result[2].message
+      }
     });
-
-    // result.nameResult
-    //   ? setErrorMessage([...errorMessage, ""])
-    //   : setErrorMessage([...errorMessage, "Please Enter your Name"]);
-
-    // result.emailResult
-    //   ? setErrorMessage([...errorMessage, ""])
-    //   : setErrorMessage([...errorMessage, "Please Enter your Email"]);
-
-    // result.passResult
-    //   ? setErrorMessage([...errorMessage, ""])
-    //   : setErrorMessage([...errorMessage, "Please Enter more 6 character"]);
-
-    // if (!validateEmail) {
-    //   alert("email is incorrect");
-    // } else {
-    //   checkAuth(email, pass, Name);
-    // }
   };
-  // console.log(errorMessage);
-  // Name && email && pass ? setDisabled(null) : null;
 
   return (
     <div>
@@ -127,8 +132,8 @@ const Signup = () => {
           onFocus={toggleNameClass}
           onBlur={toggleNameClass}
         />
-        {result.name ? null : <div className="error">Name is incorrect</div>}
       </div>
+      <div className="errorInput">{result.name.message}</div>
       <div className={`inputValue ${emailfocused ? "focused " : ""} `}>
         <label className="inputlabel">
           <span>Email</span>
@@ -141,8 +146,8 @@ const Signup = () => {
           onFocus={toggleEmailClass}
           onBlur={toggleEmailClass}
         />
-        {result.email ? null : <div className="error">Email is incorrect</div>}
       </div>
+      <div className="errorInput">{result.email.message}</div>
       <div className={`inputValue ${passfocused ? "focused" : ""} `}>
         <label className="inputlabel">
           <span>Password</span>
@@ -155,8 +160,8 @@ const Signup = () => {
           onFocus={togglePassClass}
           onBlur={togglePassClass}
         />
-        {result.pass ? null : <div className="error">Pass is incorrect</div>}
       </div>
+      <div className="errorInput">{result.pass.message}</div>
       <div className="buttonBox">
         <Button
           className={`btn btn-md btn-primary `}

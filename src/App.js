@@ -12,7 +12,7 @@ const Template = React.lazy(() => import("./components/Pages/Template"));
 const Portal = React.lazy(() => import("./components/Portal"));
 const Modal = React.lazy(() => import("./components/Modal"));
 const Login = React.lazy(() => import("./components/Portal/Login"));
-const Signup = React.lazy(() => import('./components/Portal/Signup'));
+const Signup = React.lazy(() => import("./components/Portal/Signup"));
 const Main = React.lazy(() => import("./components/Main"));
 
 import "./components/Spinner/Spinner.scss";
@@ -40,7 +40,7 @@ class App extends Component {
           path="/login"
           render={() => (
             <Portal>
-              <Modal buttonName="Login">
+              <Modal>
                 <Login />
               </Modal>
             </Portal>
@@ -50,7 +50,7 @@ class App extends Component {
           path="/signup"
           render={() => (
             <Portal>
-              <Modal buttonName="sign up">
+              <Modal>
                 <Signup />
               </Modal>
             </Portal>

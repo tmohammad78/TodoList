@@ -12,12 +12,13 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.typ) {
     case AUTH_SUCCESS:
+      console.log(action.idToken);
       return {
         ...state,
-        idToken: action.idToken,
-        email: action.email,
-        expiresIn: action.expiresIn,
-        refreshToken: action.refreshToken
+        idToken: action.idToken
+        // email: action.email,
+        // expiresIn: action.expiresIn,
+        // refreshToken: action.refreshToken
       };
 
     case AUTH_FAIL:

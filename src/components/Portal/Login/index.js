@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Button = React.lazy(() => import("../../Button"));
+import { auth } from "../../../services/auth/action";
 import "./Login.scss";
 
 const Login = () => {
-  let disabled = "disabled";
+  // let disabled = "disabled";
+  const error = useSelector((state) => state.auth);
+  console.log(error);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [emailfocused, setEmailfocused] = useState(false);
   const [passfocused, setPassfocused] = useState(false);
-
+  const dispatch = useDispatch();
   const emailHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -36,7 +40,11 @@ const Login = () => {
     });
   };
 
-  email && pass ? "" : "disabled";
+  // email && pass ? "" : "disabled";
+
+  const operation = () => {
+    dispatch(auth(email, pass));
+  };
 
   return (
     <div>
@@ -67,7 +75,7 @@ const Login = () => {
         />
       </div>
       <div className="buttonBox">
-        <Button className={`btn btn-primary btn-md `} disabled={disabled}>
+        <Button className={`btn btn-primary btn-md `} onClick={operation}>
           Log in
         </Button>
       </div>

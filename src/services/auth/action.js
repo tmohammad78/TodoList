@@ -8,7 +8,7 @@ export const authSuccess = (data) => {
     email: data.email,
     idToken: data.idToken,
     expiresIn: data.expiresIn,
-    refreshToken:data.refreshToken
+    refreshToken: data.refreshToken
   };
 };
 
@@ -53,18 +53,8 @@ export const auth = (email, pass, name) => {
         })
         .catch((e) => {
           console.log(e);
-          dispatch(authFail(e.code));
+          dispatch(authFail(e));
         });
     };
   }
 };
-
-// axios
-// .post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCxCVewTWdrVCFbeLFyz2pKuSYAl0u2L3I',authData)
-// .then((response) => {
-//   console.log(response);
-//   dispatch(authSuccess(response.data));
-// })
-// .catch(error => {
-//   console.log(error);
-// });
