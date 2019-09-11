@@ -1,46 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { validate } from "../../Validation";
+import { auth } from "../../../services/auth/action";
 
 const Button = React.lazy(() => import("../../Button"));
-import { auth } from "../../../services/auth/action";
 import "./Login.scss";
 
 const Login = () => {
-  // let disabled = "disabled";
   const error = useSelector((state) => state.auth);
-  console.log(error);
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [emailfocused, setEmailfocused] = useState(false);
-  const [passfocused, setPassfocused] = useState(false);
   const dispatch = useDispatch();
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-  };
-  const passHandler = (e) => {
-    setPass(e.target.value);
-  };
-
-  const toggleEmailClass = () => {
-    setEmailfocused((prevState) => {
-      if (email) {
-        return prevState;
-      } else {
-        return !prevState;
-      }
-    });
-  };
-  const togglePassClass = () => {
-    setPassfocused((prevState) => {
-      if (pass) {
-        return prevState;
-      } else {
-        return !prevState;
-      }
-    });
-  };
-
-  // email && pass ? "" : "disabled";
 
   const operation = () => {
     dispatch(auth(email, pass));
@@ -48,39 +17,90 @@ const Login = () => {
 
   return (
     <div>
-      <div className={`inputValue ${emailfocused ? "focused " : ""} `}>
-        <label className="inputlabel">
-          <span>Email</span>
-        </label>
-        <input
-          type="email"
-          className="input"
-          value={email}
-          onChange={emailHandler}
-          onFocus={toggleEmailClass}
-          onBlur={toggleEmailClass}
-        />
-      </div>
-      <div className={`inputValue ${passfocused ? "focused" : ""} `}>
-        <label className="inputlabel">
-          <span>Password</span>
-        </label>
-        <input
-          type="password"
-          className="input"
-          value={pass}
-          onChange={passHandler}
-          onFocus={togglePassClass}
-          onBlur={togglePassClass}
-        />
-      </div>
-      <div className="buttonBox">
-        <Button className={`btn btn-primary btn-md `} onClick={operation}>
-          Log in
-        </Button>
-      </div>
+      <Formik
+        initialValues={{
+          email: "",
+          pass: ""
+        }}
+        validationSchema={validate}
+        onSubmit={(value, action) => {}}
+      >
+        {({ errors, touched, onSubmit, values }) => {
+          let InvalidEmail = "";
+          let InvalidPass = "";
+
+          touched.email && errors.email ? (InvalidEmail = "is-invalid") : null;
+          touched.pass && errors.pass ? (InvalidPass = "is-invalid") : null;
+          return (
+            <Form onSubmit={onSubmit}>
+              <div
+                className={`inputValue ${InvalidEmail} ${
+                  touched.email && values.email ? "focused" : null
+                }  `}
+              >
+                <label className="inputlabel">
+                  <span>Email</span>
+                </label>
+                <Field
+                  type="text"
+                  name="email"
+                  value={values.email}
+                  className="input"
+                />
+              </div>
+              <ErrorMessage
+                name="email"
+                render={(message) => (
+                  <div className="errorInput">{message}</div>
+                )}
+              />
+              <div
+                className={`inputValue ${InvalidPass} ${
+                  touched.pass && values.pass ? "focused" : null
+                }  `}
+              >
+                <label className="inputlabel">
+                  <span>Password</span>
+                </label>
+                <Field
+                  type="password"
+                  name="pass"
+                  value={values.pass}
+                  className="input"
+                />
+              </div>
+              <ErrorMessage
+                name="pass"
+                render={(message) => (
+                  <div className="errorInput">{message}</div>
+                )}
+              />
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 };
 
 export default Login;
+
+// validate={(values) => {
+//   let errors = {};
+//   if (!values.email) {
+//     errors.email = "Required";
+//   } else if (
+//     !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+//       values.email
+//     )
+//   ) {
+//     errors.email = "Invalid email address";
+//   }
+//   return errors;
+// }}
+
+{
+  /* <label className="inputlabel">
+                <span>Email</span>
+              </label> */
+}

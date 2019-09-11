@@ -18,7 +18,30 @@ const Main = React.lazy(() => import("./components/Main"));
 import "./components/Spinner/Spinner.scss";
 
 class App extends Component {
+  // previousLocation = this.props.location;
+
+  // componentWillUpdate(nextProps) {
+  //   let { location } = this.props;
+  //   debugger;
+
+  //   // set previousLocation if props.location is not modal
+  //   if (
+  //     nextProps.history.action !== "POP" &&
+  //     (!location.state || !location.state.modal)
+  //   ) {
+  //     this.previousLocation = this.props.location;
+  //   }
+  // }
+
   render() {
+    // let { location } = this.props;
+    // let isModal = !!(
+    //   location.state &&
+    //   location.state.modal &&
+    //   this.previousLocation !== location
+    // ); // not initial render
+
+    console.log(this.props);
     return (
       <Suspense
         fallback={
@@ -32,10 +55,12 @@ class App extends Component {
       >
         <Header />
         <Main />
+        {/* location={isModal ? this.previousLocation : location} */}
         <Switch>
           <Route path="/how" component={HowPage} />
           <Route path="/template" component={Template} />
         </Switch>
+        {/* {isModal ? ( */}
         <Route
           path="/login"
           render={() => (
@@ -46,6 +71,7 @@ class App extends Component {
             </Portal>
           )}
         />
+        {/* // ) : null} */}
         <Route
           path="/signup"
           render={() => (
