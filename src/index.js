@@ -1,19 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import { BrowserRouter  } from 'react-router-dom';
-import Root from './Root';
+import { BrowserRouter, Route } from "react-router-dom";
+import Root from "./Root";
 
-import App from './App';
+import App from "./App";
 
-import './styles/main.scss';
+import "./styles/main.scss";
 
 const app = (
-    <Root>
+  <Root>
     <BrowserRouter>
-        <App />
+      <Route component={App} />
     </BrowserRouter>
-    </Root>
+  </Root>
 );
 
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.render(app, document.getElementById("root"));
