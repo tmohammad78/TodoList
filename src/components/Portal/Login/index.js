@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+
 import { validate } from "../../Validation";
 import { auth } from "../../../services/auth/action";
+import { changeStyleValid } from "../../Validation/valid";
 
-const Button = React.lazy(() => import("../../Button"));
+import Button from "../../Button";
 import "./Login.scss";
+// const Button = React.lazy(() => import("../../Button"));
 
 const Login = () => {
   const error = useSelector((state) => state.auth);
@@ -23,20 +26,28 @@ const Login = () => {
           pass: ""
         }}
         validationSchema={validate}
-        onSubmit={(value, action) => {}}
       >
-        {({ errors, touched, onSubmit, values }) => {
-          let InvalidEmail = "";
-          let InvalidPass = "";
+        {({ errors, touched, values, handleSubmit, isValid }) => {
+          const emailValidStyle = changeStyleValid(
+            touched,
+            values,
+            errors,
+            "email"
+          );
+          const passValidStyle = changeStyleValid(
+            touched,
+            values,
+            errors,
+            "pass"
+          );
 
-          touched.email && errors.email ? (InvalidEmail = "is-invalid") : null;
-          touched.pass && errors.pass ? (InvalidPass = "is-invalid") : null;
           return (
-            <Form onSubmit={onSubmit}>
+            <Form onSubmit={handleSubmit}>
               <div
-                className={`inputValue ${InvalidEmail} ${
-                  touched.email && values.email ? "focused" : null
-                }  `}
+                className={`inputValue 
+                ${emailValidStyle.Invalid} 
+                ${emailValidStyle.valid}  
+                ${touched.email || values.email ? "focused" : null} `}
               >
                 <label className="inputlabel">
                   <span>Email</span>
@@ -55,9 +66,10 @@ const Login = () => {
                 )}
               />
               <div
-                className={`inputValue ${InvalidPass} ${
-                  touched.pass && values.pass ? "focused" : null
-                }  `}
+                className={`inputValue  
+                ${passValidStyle.Invalid} 
+                ${passValidStyle.valid}
+                ${touched.pass || values.pass ? "focused" : null}  `}
               >
                 <label className="inputlabel">
                   <span>Password</span>
@@ -75,6 +87,15 @@ const Login = () => {
                   <div className="errorInput">{message}</div>
                 )}
               />
+              <div className="buttonBox">
+                <Button
+                  className={`btn btn-md btn-log`}
+                  type="submit"
+                  disabled={!isValid}
+                >
+                  Login in
+                </Button>
+              </div>
             </Form>
           );
         }}
@@ -84,23 +105,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// validate={(values) => {
-//   let errors = {};
-//   if (!values.email) {
-//     errors.email = "Required";
-//   } else if (
-//     !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-//       values.email
-//     )
-//   ) {
-//     errors.email = "Invalid email address";
-//   }
-//   return errors;
-// }}
-
-{
-  /* <label className="inputlabel">
-                <span>Email</span>
-              </label> */
-}
