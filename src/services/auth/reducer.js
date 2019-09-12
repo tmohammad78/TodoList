@@ -1,25 +1,34 @@
 import { AUTH_SUCCESS, AUTH_FAIL } from "./actionType";
 
 const initialState = {
-  idToken: null,
-  email: null,
-  expiresIn: null,
-  refreshToken:null,
-  errorMessage: "",
-  errorCode: ""
+  idToken: "",
+  isAuthenticated: false
+  // email: null,
+  // expiresIn: null,
+  // refreshToken: null,
+  // errorMessage: "",
+  // errorCode: ""
 };
 
 export default function(state = initialState, action) {
-  switch (action.typ) {
-    case AUTH_SUCCESS:
-      console.log(action.idToken);
-      return {
-        ...state,
-        idToken: action.idToken
-        // email: action.email,
-        // expiresIn: action.expiresIn,
-        // refreshToken: action.refreshToken
-      };
+  switch (action.type) {
+    case AUTH_SUCCESS: {
+      debugger;
+      const { idToken, isAuthenticated } = action.payload;
+      console.log(state);
+      // return {
+      //   ...state,
+      //   idToken,
+      //   isAuthenticated: true
+      //   // email: action.email,
+      //   // expiresIn: action.expiresIn,
+      //   // refreshToken: action.refreshToken
+      // };
+      return Object.assign({}, state, {
+        idToken,
+        isAuthenticated
+      });
+    }
 
     case AUTH_FAIL:
       return {

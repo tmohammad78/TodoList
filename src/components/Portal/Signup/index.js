@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validate } from "../../Validation";
 import { changeStyleValid } from "../../Validation/valid";
 import Button from "../../Button";
 
-import { auth } from "../../../services/auth/action";
+import { auth, registerUser } from "../../../services/auth/action";
 
 import "../Login/Login.scss";
 
-const Signup = () => {
+const Signup = (props) => {
+  console.log("props", props);
   const dispatch = useDispatch();
 
+  const submitForm = (values) => {
+    dispatch(
+      auth(values.name, values.email, values.pass, props.history)
+    );
+  };
   return (
     <div>
       <Formik
@@ -21,6 +28,7 @@ const Signup = () => {
           pass: ""
         }}
         validationSchema={validate}
+        onSubmit={submitForm}
         // onSubmit={}
       >
         {({
@@ -50,7 +58,6 @@ const Signup = () => {
             errors,
             "pass"
           );
-
           return (
             <Form onSubmit={handleSubmit}>
               <div
@@ -134,4 +141,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default withRouter(Signup);

@@ -1,12 +1,20 @@
 .mainBox {
   background-color: #ffff;
-  .inner{
-      padding: 40px 0px;
+  .inner {
+    padding: 40px 0px;
   }
-  .imageBox{
+  .imageBox {
     float: right;
-    width: 40%;    .image {
-        width: 100%;
+    width: 40%;
+    .image {
+      width: 100%;
+    }
+  }
+  .imageBoxsecond {
+    float: left;
+    width: 40%;
+    .image {
+      width: 100%;
     }
   }
   .infoBox {

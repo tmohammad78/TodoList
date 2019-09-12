@@ -14,10 +14,9 @@ const Login = () => {
   const error = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const operation = () => {
-    dispatch(auth(email, pass));
+  const submitForm = (values) => {
+    dispatch(auth(values.email, values.pass, props.history));
   };
-
   return (
     <div>
       <Formik
@@ -26,6 +25,10 @@ const Login = () => {
           pass: ""
         }}
         validationSchema={validate}
+        onSubmit={() => {
+          debugger;
+          submitForm;
+        }}
       >
         {({ errors, touched, values, handleSubmit, isValid }) => {
           const emailValidStyle = changeStyleValid(
@@ -91,7 +94,8 @@ const Login = () => {
                 <Button
                   className={`btn btn-md btn-log`}
                   type="submit"
-                  disabled={!isValid}
+
+                  // disabled={!isValid}
                 >
                   Login in
                 </Button>

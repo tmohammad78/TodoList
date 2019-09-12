@@ -14,6 +14,8 @@ const Modal = React.lazy(() => import("./components/Modal"));
 const Login = React.lazy(() => import("./components/Portal/Login"));
 const Signup = React.lazy(() => import("./components/Portal/Signup"));
 const Main = React.lazy(() => import("./components/Main"));
+import PrivateRoute from './components/privateRoute';
+import Dashboard from './components/Dashboard';
 
 import "./components/Spinner/Spinner.scss";
 
@@ -22,7 +24,6 @@ class App extends Component {
 
   // componentWillUpdate(nextProps) {
   //   let { location } = this.props;
-  //   debugger;
 
   //   // set previousLocation if props.location is not modal
   //   if (
@@ -59,29 +60,31 @@ class App extends Component {
         <Switch>
           <Route path="/how" component={HowPage} />
           <Route path="/template" component={Template} />
+
+          {/* {isModal ? ( */}
+          <Route
+            path="/login"
+            render={() => (
+              <Portal>
+                <Modal>
+                  <Login />
+                </Modal>
+              </Portal>
+            )}
+          />
+          {/* // ) : null} */}
+          <Route
+            path="/signup"
+            render={() => (
+              <Portal>
+                <Modal>
+                  <Signup />
+                </Modal>
+              </Portal>
+            )}
+          />
+          <PrivateRoute path='/dashboard' exact strict component={Dashboard}   />
         </Switch>
-        {/* {isModal ? ( */}
-        <Route
-          path="/login"
-          render={() => (
-            <Portal>
-              <Modal>
-                <Login />
-              </Modal>
-            </Portal>
-          )}
-        />
-        {/* // ) : null} */}
-        <Route
-          path="/signup"
-          render={() => (
-            <Portal>
-              <Modal>
-                <Signup />
-              </Modal>
-            </Portal>
-          )}
-        />
       </Suspense>
     );
   }
