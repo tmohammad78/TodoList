@@ -10,24 +10,14 @@ const initialState = {
   // errorCode: ""
 };
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case AUTH_SUCCESS: {
-      debugger;
-      const { idToken, isAuthenticated } = action.payload;
-      console.log(state);
-      // return {
-      //   ...state,
-      //   idToken,
-      //   isAuthenticated: true
-      //   // email: action.email,
-      //   // expiresIn: action.expiresIn,
-      //   // refreshToken: action.refreshToken
-      // };
-      return Object.assign({}, state, {
-        idToken,
-        isAuthenticated
-      });
+      return {
+        ...state,
+        idToken: action.payload.idToken,
+        isAuthenticated: action.payload.isAuthenticated
+      };
     }
 
     case AUTH_FAIL:
@@ -40,4 +30,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};

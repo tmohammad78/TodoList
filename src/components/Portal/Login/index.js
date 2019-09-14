@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { withRouter } from "react-router-dom";
 
 import { validate } from "../../Validation";
 import { auth } from "../../../services/auth/action";
 import { changeStyleValid } from "../../Validation/valid";
-
 import Button from "../../Button";
-import "./Login.scss";
-// const Button = React.lazy(() => import("../../Button"));
 
-const Login = () => {
+import "./Login.scss";
+
+const Login = (props) => {
   const error = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const submitForm = (values) => {
-    dispatch(auth(values.email, values.pass, props.history));
+    dispatch(auth(null, values.email, values.pass, props.history));
   };
+
   return (
     <div>
       <Formik
@@ -25,10 +26,6 @@ const Login = () => {
           pass: ""
         }}
         validationSchema={validate}
-        onSubmit={() => {
-          debugger;
-          submitForm;
-        }}
       >
         {({ errors, touched, values, handleSubmit, isValid }) => {
           const emailValidStyle = changeStyleValid(
@@ -94,7 +91,7 @@ const Login = () => {
                 <Button
                   className={`btn btn-md btn-log`}
                   type="submit"
-
+                  onClick={() => submitForm(values)}
                   // disabled={!isValid}
                 >
                   Login in
@@ -108,4 +105,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

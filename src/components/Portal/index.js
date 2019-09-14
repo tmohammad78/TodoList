@@ -5,6 +5,7 @@ const Portal = (props) => {
   const modalRoot = document.getElementById("modal-root");
   const el = document.createElement("div");
 
+  
   useEffect(() => {
     modalRoot.appendChild(el);
     return function cleanup() {

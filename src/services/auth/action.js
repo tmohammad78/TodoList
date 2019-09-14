@@ -4,7 +4,8 @@ import axios from "axios";
 export const authSuccess = (data) => ({
   type: AUTH_SUCCESS,
   payload: {
-    idToken: data.idToken
+    idToken: data.idToken,
+    isAuthenticated: true
   }
 });
 // return {
@@ -21,33 +22,8 @@ export const authFail = (error) => {
   };
 };
 
-// export const registerUser = (name,email,pass,history) => {
-//   return dispatch => {
-//     const apiData = {
-//       email: email,
-//       password: pass,
-//       returnSecureToken: true
-//     };
-//     axios
-//       .post(
-//         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxCVewTWdrVCFbeLFyz2pKuSYAl0u2L3I",
-//         apiData
-//       )
-//       .then((response) => {
-//         console.log(response);
-//         if(response.status == 200){
-//           history.push('/dashboard');
-//           dispatch(authSuccess(response.data));
-//         }
-//       })
-//       .catch((error) => {
-//         console.log(error.response.data.error);
-//         dispatch(authFail(error.response.data.error));
-//       });
-//   };
-//   }
-
-export const auth = (name, email, pass, history) => (dispatch) => {
+export const auth = (name, email, pass, history) => (dispatch, getState) => {
+  const test = getState().auth.isAuthenticated;
   const apiData = {
     email: email,
     password: pass,
@@ -60,20 +36,13 @@ export const auth = (name, email, pass, history) => (dispatch) => {
         apiData
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.status == 200) {
-          history.push("/dashboard");
-          // return dispatch({
-          //   type: AUTH_SUCCESS,
-          //   payload: {
-          //     idToken: response.data.idToken,
-          //     isAuthenticated: true
-          //   }
-          // });
+          history.push("/login");
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         // dispatch(authFail(error.response.data.error));
       });
   } else {
@@ -83,36 +52,21 @@ export const auth = (name, email, pass, history) => (dispatch) => {
         apiData
       )
       .then((response) => {
-        console.log(response);
         if (response.status == 200) {
-          history.push("/dashboard");
-          // return dispatch({
-          //   type: AUTH_SUCCESS,
-          //   payload: {
-          //     idToken: response.data.idToken,
-          //     isAuthenticated: true
-          //   }
-          // });
+          localStorage.setItem("Token", response.data.idToken);
+          dispatch({
+            type: AUTH_SUCCESS,
+            payload: {
+              idToken: response.data.idToken,
+              isAuthenticated: true
+            }
+          });
+          history.push("/app");
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.error.message);
         // dispatch(authFail(error.response.data.error));
       });
   }
-  // } else {
-  //   return (dispatch) => {
-  //     fire
-  //       .auth()
-  //       .signInWithEmailAndPassword(email, pass)
-  //       .then((response) => {
-  //         console.log(response);
-  //         dispatch(authSuccess(response.data));
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //         dispatch(authFail(e));
-  //       });
-  //   };
-  // }
 };

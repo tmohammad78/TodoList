@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+
 import { validate } from "../../Validation";
 import { changeStyleValid } from "../../Validation/valid";
 import Button from "../../Button";
-
-import { auth, registerUser } from "../../../services/auth/action";
+import { auth } from "../../../services/auth/action";
 
 import "../Login/Login.scss";
 
 const Signup = (props) => {
-  console.log("props", props);
   const dispatch = useDispatch();
 
   const submitForm = (values) => {
-    dispatch(
-      auth(values.name, values.email, values.pass, props.history)
-    );
+    dispatch(auth(values.name, values.email, values.pass, props.history));
   };
   return (
     <div>
@@ -29,7 +26,6 @@ const Signup = (props) => {
         }}
         validationSchema={validate}
         onSubmit={submitForm}
-        // onSubmit={}
       >
         {({
           errors,
@@ -128,7 +124,6 @@ const Signup = (props) => {
                   className={`btn btn-md btn-log`}
                   type="submit"
                   disabled={!isValid}
-                  // onClick={Operation}
                 >
                   Sign up
                 </Button>

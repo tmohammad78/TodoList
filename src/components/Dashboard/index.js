@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dashboard = () => {
+const Application = () => {
   return <div>Dashboard</div>;
 };
-export default Dashboard;
+export default Application;

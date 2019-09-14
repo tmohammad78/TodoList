@@ -17,10 +17,11 @@ export default (initialState) => {
   const store = createStore(rootReducer, initialState, enhancer);
   store.subscribe(() => {
     const state = store.getState();
-    const token = {
-      token: state.auth
-    };
-    window.localStorage.setItem("token", JSON.stringify(token));
+    // const token = {
+    //   token: state.auth
+    // };
   });
+  //   window.localStorage.setItem("token", JSON.stringify(token));
+  // });
   return store;
 };

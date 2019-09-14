@@ -4,9 +4,9 @@ import { withRouter } from "react-router-dom";
 import Cancel from "../../assets/cancel.svg";
 import "./Modal.scss";
 
-const Modal = ({ children, history }) => {
+const Modal = (props) => {
   const closeModal = () => {
-    history.goBack();
+    props.history.goBack();
   };
 
   return (
@@ -18,7 +18,7 @@ const Modal = ({ children, history }) => {
               <Cancel />
             </div>
           </div>
-          <div className="operation">{children}</div>
+          <div className="operation">{props.children}</div>
         </div>
       </div>
       <div className="lightBox" onClick={closeModal}></div>
