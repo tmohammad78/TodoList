@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const HowPage = () => (
-    <div>
-        How
-    </div>
-);
+const HowPage = () => {
+  return <div>How</div>;
+};
 
 export default HowPage;

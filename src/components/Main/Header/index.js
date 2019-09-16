@@ -1,11 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
-import Logo from "../../assets/logo.svg";
+import Logo from "../../../assets/logo.svg";
 
 import "./Header.scss";
 
-const Header = () => {
+const Header = (props) => {
+  console.log("this props", props);
   return (
     <div className="header clearfix ">
       <div className="wrapper clearfix">
@@ -18,19 +19,17 @@ const Header = () => {
           <li className="header-tab">
             <ul className="list-tab">
               <li className="item">
-                <NavLink to="/how" activeClassName="selected">
-                  How It Works
-                </NavLink>
+                <NavLink to="/main/how">How It Works</NavLink>
               </li>
               <li className="item">
-                <NavLink to="/template" activeClassName="selected">
+                <NavLink to="/main/template" activeClassName="selected">
                   template
                 </NavLink>
               </li>
               <li className="item">
                 <NavLink
                   to={{
-                    pathname: "/login",
+                    pathname: "/main/login",
                     state: {
                       modal: true
                     }
@@ -43,7 +42,7 @@ const Header = () => {
               <li className="item">
                 <NavLink
                   to={{
-                    pathname: "/signup",
+                    pathname: "/main/signup",
                     state: {
                       modal: true
                     }

@@ -1,7 +1,11 @@
 import React, { Component, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-const Header = React.lazy(() => import("./components/Header"));
+import Routing from "./hoc/Route";
+import { routes } from "./Routes";
+import { RouteWithSubRoutes } from "./hoc/Route/index";
+
+const Header = React.lazy(() => import("./components/Main/Header"));
 const HowPage = React.lazy(() => import("./components/Pages/HowPage"));
 const Template = React.lazy(() => import("./components/Pages/Template"));
 const Portal = React.lazy(() => import("./components/Portal"));
@@ -10,7 +14,7 @@ const Login = React.lazy(() => import("./components/Portal/Login"));
 const Signup = React.lazy(() => import("./components/Portal/Signup"));
 const Main = React.lazy(() => import("./components/Main"));
 import PrivateRoute from "./components/privateRoute";
-import Application from "./components/Dashboard";
+import Application from "./components/Application";
 
 import "./components/Spinner/Spinner.scss";
 
@@ -30,32 +34,53 @@ class App extends Component {
   // }
 
   render() {
-    // let { location } = this.props;
-    // let isModal = !!(
-    //   location.state &&
-    //   location.state.modal &&
-    //   this.previousLocation !== location
-    // ); // not initial render
     return (
-      <Suspense
-        fallback={
-          <div className="spinner lds-ring">
-            <div />
-            <div />
-            <div />
-            <div />
+        <Router>
+          <div>
+            <Switch>
+              {routes.map((route, i) => {
+                return <RouteWithSubRoutes {...route} key={i} />;
+              })}
+            </Switch>
           </div>
-        }
-      >
-        <Header />
+        </Router>
+    );
+  }
+}
+export default App;
+
+// let { location } = this.props;
+// let isModal = !!(
+//   location.state &&
+//   location.state.modal &&
+//   this.previousLocation !== location
+// ); // not initial render
+// return (
+// <Suspense
+//   fallback={
+//     <div className="spinner lds-ring">
+//       <div />
+//       <div />
+//       <div />
+//       <div />
+//     </div>
+//   }
+// >
+// <div>
+
+//   <Switch>
+//     {Routes.map((route, i) => {
+//       return <WithRoute {...route} key={i} />;
+//     })}
+//   </Switch>
+// </div>
+
+{
+  /* <Header />
         <Main />
-        {/* location={isModal ? this.previousLocation : location} */}
         <Switch>
-          {/* <Route path="/" exact component={Main} /> */}
           <Route path="/how" component={HowPage} />
           <Route path="/template" component={Template} />
-
-          {/* {isModal ? ( */}  
           <Route
             path="/login"
             render={() => (
@@ -78,9 +103,6 @@ class App extends Component {
             )}
           />
           <PrivateRoute path="/app" exact component={Application} />
-        </Switch>
-      </Suspense>
-    );
-  }
+        </Switch> */
 }
-export default App;
+// </Suspense>
