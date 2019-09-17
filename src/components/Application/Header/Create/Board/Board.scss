@@ -1,20 +1,62 @@
-input[type=checkbox] {
-    display:none;
-}
+.custom-checkbox {
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  user-select: none;
+  &.disabled {
+    color: #b8b8b8;
+    cursor: default;
+    span {
+      box-shadow: none;
+      background: #ddd;
+    }
+  }
 
-input[type=checkbox] + label {
-    display:inline-block;
-    padding: 0 0 0 0px;
-    background:url("https://pbs.twimg.com/profile_images/550291079719698432/LbybHjIh.jpeg") no-repeat;
-    height: 125px;
-    width: 125px;;
-    background-size: 50%;
-}
+  span {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    // margin-left: 9px;
+    border-radius: 5px;
+    vertical-align: middle;
+    background: #d4d4d403;
+  }
+  .checkBack {
+    background-image: url(https://images.unsplash.com/photo-1568587672698-565c855c355c?ixlib=rb-1.2.1…80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9);
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    background: cover;
+    background-position: 50%;
+    display: inline-block;
+    border-radius: 5px;
+  }
 
-input[type=checkbox]:checked + label {
-    background:url("https://images.unsplash.com/photo-1568473648251-3a0c3aa56192?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9") no-repeat;
-    height: 125px;
-    width: 125px;
-    display:inline-block;
-    background-size: 50%;
+  input {
+    position: absolute;
+    opacity: 0;
+    &:focus + span {
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+
+    &:checked + .checkBack span {
+      background: #09090947;
+    }
+    $size: 2px;
+    $color: white;
+    &:checked + .checkBack span:after {
+      content: "";
+      position: absolute;
+      left: 30%;
+      top: 50%;
+      width: $size;
+      height: $size;
+      background: $color;
+      box-shadow: $size 0 0 $color, $size * 2 0 0 $color,
+        $size * 2 #{-$size} 0 $color, $size * 2 #{-$size * 2} 0 $color,
+        $size * 2 #{-$size * 3} 0 $color, $size * 2 #{-$size * 4} 0 $color;
+      transform: rotate(45deg) translate(-50%, -50%);
+    }
+  }
 }

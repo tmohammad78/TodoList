@@ -7,18 +7,40 @@ import Button from "../../../../Button";
 
 const Board = () => {
   const [boardValue, setBoardValue] = useState("");
+  const [template, setTemplate] = useState(false);
+
   const dispatch = useDispatch();
   const submit = () => {
-    dispatch(addBoard(boardValue));
+    dispatch(addBoard(boardValue,template));
   };
   const handleValue = (e) => {
     setBoardValue(e.target.value);
   };
+  const handleCheck = (e) => {
+    console.log(e.target.style.backgroundImage);
+    setTemplate(e.target.style.backgroundImage);
+  };
   return (
     <div>
       <input type="text" value={boardValue} onChange={handleValue} />
-      {/* <input type="checkbox" name="fordCheckBox" id="Ford" value="Ford" />
-      <label for="Ford"></label> */}
+      <label htmlFor="checkbox" className="custom-checkbox">
+        <input
+          type="checkbox"
+          className="styled_checkbox"
+          // checked={template}
+          style={{
+            backgroundImage:
+              "url(" +
+              "https://images.unsplash.com/photo-1568587672698-565c855c355c?ixlib=rb-1.2.1…80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9" +
+              ")"
+          }}
+          onChange={handleCheck}
+          id="checkbox"
+        />
+        <div className="checkBack">
+          <span />
+        </div>
+      </label>
       <button onClick={submit}>submit</button>
     </div>
   );

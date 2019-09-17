@@ -3,7 +3,7 @@ $color-gray-light: #ccc;
 $primary-color: #e64e40;
 $second-primary: #78d9e0;
 $color-white: #ffffff;
-$color-milk:#FAFAFA;
+$color-milk: #fafafa;
 
 @mixin btn-base() {
   font-family: "Graphik Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -93,13 +93,17 @@ $color-milk:#FAFAFA;
 .buttonBox {
   padding: 25px 0;
 }
+.btn-save {
+  color: #e6c60d;
+}
+
 .btn-white {
   position: relative;
   color: black;
   display: block;
   text-align: left;
   @include bgcolor($color-milk);
-  &:hover{
-    background-color: lighten($color: $color-milk, $amount: 50%)
+  &:hover {
+    background-color: lighten($color: $color-milk, $amount: 50%);
   }
 }

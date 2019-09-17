@@ -4,7 +4,8 @@ import thunk from "redux-thunk";
 import rootReducer from "../services/reducer";
 
 export default (initialState) => {
-  // initialState = JSON.parse(window.localStorage.getItem('state')) || initialState;
+  initialState =
+    JSON.parse(window.localStorage.getItem("board")) || initialState;
 
   const middleware = [thunk];
   let enhancer;
@@ -17,11 +18,11 @@ export default (initialState) => {
   const store = createStore(rootReducer, initialState, enhancer);
   store.subscribe(() => {
     const state = store.getState();
-    // const token = {
-    //   token: state.auth
-    // };
+    const board = {
+      board: state.board
+    };
+    window.localStorage.setItem("board", JSON.stringify(board));
   });
-  //   window.localStorage.setItem("token", JSON.stringify(token));
   // });
   return store;
 };

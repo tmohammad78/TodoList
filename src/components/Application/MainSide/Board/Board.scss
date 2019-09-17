@@ -1,0 +1,50 @@
+$shadow: rgba(0, 0, 0, 0.3);
+.board-item {
+  display: inline-block;
+  width: 250px;
+  height: 100px;
+  background-position: 50%;
+  background-size: cover;
+  margin: 10px;
+  a {
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    display: block;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.3);
+    .board-name {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: monospace;
+      font-size: 25px;
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+      .board-details {
+        .star-icon {
+          transform: translateX(-8px);
+          opacity: 1;
+          float: right;
+        }
+      }
+    }
+    .board-name {
+    }
+    .board-details {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+
+      .star-icon {
+        float: right;
+        transform: translateX(20px);
+        opacity: 0;
+        transition: all 0.5s;
+      }
+    }
+  }
+}
