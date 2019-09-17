@@ -1,7 +1,9 @@
 $transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 $color-gray-light: #ccc;
 $primary-color: #e64e40;
-$second-primary:  #78d9e0;
+$second-primary: #78d9e0;
+$color-white: #ffffff;
+$color-milk:#FAFAFA;
 
 @mixin btn-base() {
   font-family: "Graphik Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -43,30 +45,41 @@ $second-primary:  #78d9e0;
   }
 }
 
-
 [class^="btn-"],
 [class*="btn-"] {
   @include btn();
 }
-
+.btn-simple {
+  color: black;
+  text-align: left;
+  text-transform: none;
+  background: none;
+  height: 100%;
+  outline: none;
+  border: none;
+  padding: 6px 12px;
+  width: 100%;
+  white-space: normal;
+  @include bgcolor($color-white);
+}
 .btn-primary {
   position: relative;
   @include bgcolor($primary-color);
-//   &:before {
-//     content: "";
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-//     right: 0;
-//     left: 0;
-//     background-color: #3e3d3d30;
-//     transform: translateX(-100%);
-//   }
-//   &:hover {
-//     &:before {
-//       transform: translateX(0);
-//     }
-//   }
+  //   &:before {
+  //     content: "";
+  //     position: absolute;
+  //     top: 0;
+  //     bottom: 0;
+  //     right: 0;
+  //     left: 0;
+  //     background-color: #3e3d3d30;
+  //     transform: translateX(-100%);
+  //   }
+  //   &:hover {
+  //     &:before {
+  //       transform: translateX(0);
+  //     }
+  //   }
   // color: white;
 }
 .btn-md {
@@ -77,7 +90,16 @@ $second-primary:  #78d9e0;
   position: relative;
   @include bgcolor($second-primary);
 }
-.buttonBox{
-    padding: 25px 0;
-    text-align: center;
+.buttonBox {
+  padding: 25px 0;
+}
+.btn-white {
+  position: relative;
+  color: black;
+  display: block;
+  text-align: left;
+  @include bgcolor($color-milk);
+  &:hover{
+    background-color: lighten($color: $color-milk, $amount: 50%)
+  }
 }

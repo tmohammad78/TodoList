@@ -4,21 +4,25 @@ import { withRouter } from "react-router-dom";
 import Cancel from "../../assets/cancel.svg";
 import "./Modal.scss";
 
-const Modal = (props) => {
+const Modal = ({ Route, handleModal, history, style, children, ...props }) => {
   const closeModal = () => {
-    props.history.goBack();
+    if (Route) {
+      history.goBack();
+    } else {
+      handleModal();
+    }
   };
 
   return (
     <div className="parent">
-      <div className="modalBox">
+      <div className="modalBox" style={style}>
         <div className="wrapper">
           <div className="ancBox">
             <div className="img" onClick={closeModal}>
               <Cancel />
             </div>
           </div>
-          <div className="operation">{props.children}</div>
+          <div className="operation">{children}</div>
         </div>
       </div>
       <div className="lightBox" onClick={closeModal}></div>

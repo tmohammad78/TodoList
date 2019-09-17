@@ -1,0 +1,15 @@
+.sideNav{
+    width: 30%;
+    height: 650px;
+    float: left;
+    // background-color: #eeeeee;
+
+    .selectItems{
+        padding: 10px;
+        .items{
+            .selected{
+                background-color: white;    
+            }
+        }
+    }
+}
