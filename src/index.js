@@ -14,6 +14,7 @@ const app = (
     <BrowserRouter>
       <Route path="/main" exact component={App} />
       <Route path="/app" component={Application} />
+      <Route path=''  />
     </BrowserRouter>
   </Root>
 );

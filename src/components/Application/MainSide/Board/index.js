@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Switch, Route, Link } from "react-router-dom";
+import Item from "./item";
 import "./Board.scss";
 
-const Board = () => {
+const Board = (props) => {
+  console.log(props)
   const [saveBoard, setSaveBoard] = useState(false);
   const dispatch = useDispatch();
   const handleSaveBoard = (e) => {
@@ -14,43 +15,37 @@ const Board = () => {
     // dispatch(saveBoard());
   };
   const boardName = useSelector((state) => state.board.board);
-  console.log(boardName);
+  const starBoard = useSelector((state) => state.board.starBoard);
+
+  console.log("starBoard", starBoard);
+  const rowBoard = [];
+  const rowStarBoard = [];
+  if (boardName) {
+    boardName.forEach((item) => {
+      rowBoard.push(<Item item={item} route={props} />);
+    });
+  }
+
+  if (starBoard) {
+    starBoard.forEach((item) => {
+      rowStarBoard.push(<Item item={item}  />);
+    });
+  }
   return (
     <div className="board-section">
       <div className="board">
-        <ul>
-          {boardName.map((item) => {
-            const test = item.image;
-            return (
-              <li
-                className="board-item"
-                style={{
-                  backgroundImage: test
-                }}
-                className="board-item"
-              >
-                <Link>
-                  <div className="clearfix">
-                    <span className="board-name">{item.name}</span>
-                    <div className="board-details">
-                      <span className="star-icon">
-                        <button
-                          className={"btn-" + `${saveBoard ? "save" : ""}`}
-                          style={{
-                            padding: "7px 0px"
-                          }}
-                          onClick={handleSaveBoard}
-                        >
-                          <i class="far fa-star"></i>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        {rowStarBoard ? (
+          <div>
+            <h2>Star Board</h2>
+            <ul>{rowStarBoard}</ul>
+          </div>
+        ) : null}
+        {rowBoard ? (
+          <div>
+            <h2>Board</h2>
+            <ul>{rowBoard}</ul>
+          </div>
+        ) : null}
       </div>
     </div>
   );

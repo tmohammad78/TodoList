@@ -1,12 +1,13 @@
-import { ADD_BOARD } from "./actionType";
+import { ADD_BOARD, ADD_STAR } from "./actionType";
 
 const initialState = {
   board: [
     {
-      name: "",
+      name: null,
       image: null
     }
-  ]
+  ],
+  starBoard: []
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -19,6 +20,12 @@ export default (state = initialState, action) => {
             image: action.payload.image
           }
         ]
+      };
+    }
+    case ADD_STAR: {
+      return {
+        ...state,
+        starBoard: [action.items,...state.starBoard]
       };
     }
     default:
