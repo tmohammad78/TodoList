@@ -36,14 +36,12 @@ export const auth = (name, email, pass, history) => (dispatch, getState) => {
         apiData
       )
       .then((response) => {
-        // console.log(response);
         if (response.status == 200) {
           history.push("/login");
         }
       })
       .catch((error) => {
-        // console.log(error);
-        // dispatch(authFail(error.response.data.error));
+
       });
   } else {
     return axios

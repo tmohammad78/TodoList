@@ -30,7 +30,7 @@ class App extends Component {
   // }
 
   render() {
-    console.log(this.props.match);
+
     // let { location } = this.props;
     // let isModal = !!(
     //   location.state &&

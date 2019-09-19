@@ -10,8 +10,6 @@ import "./Application.scss";
 
 const Application = (props) => {
   const boardName = useSelector((state) => state.board.board);
-  console.log(boardName);
-  console.log(props);
   return (
     <React.Fragment>
       <div>
@@ -20,7 +18,6 @@ const Application = (props) => {
       <Switch>
         {boardName.map((item) => {
           if (item.name) {
-            console.log(item);
             return (
               <Route
                 path={`${props.match.path}/${item.name}`}

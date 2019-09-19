@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Button } from "antd";
+// import 'antd/es/button/style/css';
 import Item from "./item";
 import "./Board.scss";
 
 const Board = (props) => {
-  console.log(props)
   const [saveBoard, setSaveBoard] = useState(false);
   const dispatch = useDispatch();
   const handleSaveBoard = (e) => {
@@ -28,12 +29,13 @@ const Board = (props) => {
 
   if (starBoard) {
     starBoard.forEach((item) => {
-      rowStarBoard.push(<Item item={item}  />);
+      rowStarBoard.push(<Item item={item} />);
     });
   }
   return (
     <div className="board-section">
       <div className="board">
+        <div className='icon-plus' />
         {rowStarBoard ? (
           <div>
             <h2>Star Board</h2>

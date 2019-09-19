@@ -4,7 +4,6 @@ import { addStar } from "../../../../../services/board/action";
 import { Switch, Route, Link } from "react-router-dom";
 
 const Item = ({ item, route }) => {
-  console.log(route);
   const dispatch = useDispatch();
   const [star, setStar] = useState(false);
   const handleStarBoard = () => {

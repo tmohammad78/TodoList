@@ -1,7 +1,8 @@
 const path = require("path");
+// const __dirname=require('./');
+const PROJECT_ROOT = path.resolve(__dirname, "./");
 const autoprefixer = require("autoprefixer");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 module.exports = {
   devtool: "cheap-module-eval-source-map",
   entry: "./src/index.js",
@@ -15,14 +16,37 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx", ".json"],
+    // alias: {
+    //   components: path.resolve(__dirname, "./src/components")
+    // }
+    // alias: {
+    //   components: path.resolve(PROJECT_ROOT, "./src/components/")
+    // }
   },
+  // node: {
+  //   __dirname: false
+  // },
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true,
+              modifyVars: { "@primary-color": "red" }
+            }
+          }
+        ]
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -37,6 +61,13 @@ module.exports = {
               // sourceMap:false
             }
           },
+          // {
+          //   loader: "less-loader",
+          //   options: {
+          //     modifyVars: antThemeVars
+          //   }
+          // },
+
           {
             loader: "postcss-loader",
             options: {
@@ -57,7 +88,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
+        test: /\.(png|woff|woff2|eot|ttf|jpe?g|gif)$/,
         loader: "url-loader?limit=8000&name=images/[name].[ext]"
       },
       {

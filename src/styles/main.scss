@@ -1,8 +1,10 @@
-//base file 
-@import './base/base.scss';
-@import './base/typography.scss';
+//base file
+@import "./base/base.scss";
+@import "./base/typography.scss";
 
+@import "./icons/variables";
+@import "./icons/font";
 
 //grid
 
-@import './grid/index.scss';
+@import "./grid/index.scss";

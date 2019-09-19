@@ -14,6 +14,11 @@
     float: left;
   }
   .right {
+    float: right;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 50px;
     .modalText {
       color: #5e6c84;
       font-size: 12px;
@@ -26,15 +31,10 @@
       cursor: pointer;
       background-color: lighten($color: #ff9000, $amount: 20%);
       border-radius: 5px;
-      padding: 4px 5px 1px;
-      svg {
-        width: 20px;
-        height: 20px;
-      }
+      padding: 6px;
       &:hover {
         background-color: darken($color: #ff9000, $amount: 5%);
       }
     }
-    float: right;
   }
 }

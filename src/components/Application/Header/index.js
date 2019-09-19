@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../../assets/Logo.svg";
-import Plus from "../../../assets/add.svg";
-import Modal from "../../Modal/index";
-import Button from "../../Button/index";
+import Modal from "../../Modal";
+import Portal from "../../Portal";
 import "./Header.scss";
 import Board from "./Create/Board";
 
@@ -18,21 +16,25 @@ const Header = () => {
   return (
     <div className="app_header clearfix">
       <div className="wrapper">
-        <div className="app_logo">
+        {/* <div className="app_logo">
           <div className="img">
             <Logo />
           </div>
-        </div>
+        </div> */}
         <div className="left"></div>
         <div className="right">
-          <div className="icon" onClick={handleModal}>
-            <Plus />
-          </div>
+          <button className="btn-icon icon " onClick={handleModal}>
+            <div className="icon-plus" />
+          </button>
           {toggleModal ? (
-            <Modal title="create" handleModal={handleModal}>
-              <Board handleModal={handleModal} />
-            </Modal>
-          ) : null}
+            // <Modal title="create" handleModal={handleModal}>
+            <Portal>
+              <Modal onClose={handleModal}>
+                <Board />
+              </Modal>
+            </Portal>
+          ) : // </Modal>
+          null}
         </div>
       </div>
     </div>

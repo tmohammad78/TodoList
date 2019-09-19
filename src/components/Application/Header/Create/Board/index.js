@@ -1,80 +1,77 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import RadioButton from "/components/Button/RadioButton/RadioButton";
+import RadioButtonGroup from "/components/Button/RadioButton/RadioButtonGroup";
+import { validateCreate } from "/components/validation";
+import { Image1, Image2 } from "./InputImages";
 import "./Board.scss";
 
 import { addBoard } from "../../../../../services/board/action";
 import Button from "../../../../Button";
 
-const Board = ({ handleModal }) => {
-  const [boardValue, setBoardValue] = useState("");
-  const [template, setTemplate] = useState(false);
-
+const Board = () => {
   const dispatch = useDispatch();
-  const submit = () => {
-    handleModal(), dispatch(addBoard(boardValue, template));
+  const submit = (values) => {
+    let Image = "";
+    if (values.radioGroup == "Image1") {
+      Image = Image1;
+    } else {
+      Image = Image2;
+    }
+    dispatch(addBoard(values.boardValue, Image));
   };
-  const handleValue = (e) => {
-    setBoardValue(e.target.value);
-  };
-  const handleCheck = (e) => {
-    console.log(e.target.style.backgroundImage);
-    setTemplate(e.target.style.backgroundImage);
-  };
+
   return (
     <div>
-      <input type="text" value={boardValue} onChange={handleValue} />
-      <label htmlFor="checkbox" className="custom-checkbox">
-        <input
-          type="checkbox"
-          className="styled_checkbox"
-          // checked={template}
-          style={{
-            backgroundImage:
-              "url(" +
-              "https://images.unsplash.com/photo-1568587672698-565c855c355c?ixlib=rb-1.2.1…80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9" +
-              ")"
-          }}
-          onChange={handleCheck}
-          id="checkbox"
-        />
-        <div
-          className="checkBack"
-          style={{
-            backgroundImage:
-              "url(" +
-              "https://images.unsplash.com/photo-1568587672698-565c855c355c?ixlib=rb-1.2.1…80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9" +
-              ")"
-          }}
-        >
-          <span />
-        </div>
-      </label>
-      <label htmlFor="checkbox2" className="custom-checkbox">
-        <input
-          type="checkbox"
-          className="styled_checkbox"
-          style={{
-            backgroundImage:
-              "url(" +
-              "https://images.unsplash.com/photo-1568473648251-3a0c3aa56192?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9" +
-              ")"
-          }}
-          onChange={handleCheck}
-          id="checkbox2"
-        />
-        <div
-          className="checkBack"
-          style={{
-            backgroundImage:
-              "url(" +
-              "https://images.unsplash.com/photo-1568473648251-3a0c3aa56192?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjcwNjZ9" +
-              ")"
-          }}
-        >
-          <span />
-        </div>
-      </label>
-      <button onClick={submit}>submit</button>
+      <Formik
+        initialValues={{
+          boardValue: "",
+          radioGroup: ""
+        }}
+        validationSchema={validateCreate}
+      >
+        {({ values, errors, touched, isValid }) => {
+          return (
+            <Form>
+              <Field type="text" name="boardValue" />
+              <ErrorMessage
+                name="boardValue"
+                render={(message) => (
+                  <div className="errorInput">{message}</div>
+                )}
+              />
+              <RadioButtonGroup
+                id="radioGroup"
+                value={values.radioGroup}
+                error={errors.radioGroup}
+                touched={touched.radioGroup}
+              >
+                <Field
+                  component={RadioButton}
+                  name="radioGroup"
+                  id="Image1"
+                  Image={Image1}
+                />
+                <Field
+                  component={RadioButton}
+                  name="radioGroup"
+                  id="Image2"
+                  Image={Image2}
+                />
+              </RadioButtonGroup>
+
+              <button
+                type="submit"
+                disabled={!isValid}
+                onClick={() => submit(values)}
+              >
+                submit
+              </button>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 };

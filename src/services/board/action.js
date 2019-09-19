@@ -11,16 +11,6 @@ export const addBoard = (value, template) => (dispatch) => {
   });
 };
 
-// export const testr = (item) => (dispatch) => {
-//   console.log(item)
-//   return {
-//     type: ADD_STAR,
-//     items: {
-//       name:item.name,
-//       image:item.image
-//     }
-//   };
-// };
 export const addStar = (item) => (dispatch) => {
   dispatch({
     type: ADD_STAR,
