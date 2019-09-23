@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": false,
     "baseUrl": "./",
     "paths": {
-      "components/*": ["./components/*"]
+      "components/*": ["src/components/*"]
     }
   }
 }
