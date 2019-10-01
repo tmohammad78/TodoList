@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
@@ -136,4 +135,4 @@ const Signup = (props) => {
   );
 };
 
-export default withRouter(Signup);
+export default Signup;

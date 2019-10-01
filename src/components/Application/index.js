@@ -1,5 +1,4 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Header";
 import SideNav from "./SideNav";
@@ -15,7 +14,7 @@ const Application = (props) => {
       <div>
         <Header />
       </div>
-      <Switch>
+      {/* <Switch>
         {boardName.map((item) => {
           if (item.name) {
             return (
@@ -28,7 +27,6 @@ const Application = (props) => {
             );
           }
         })}
-        {/* <Route path={`${props.match.path}/test`} component={Test} /> */}
         <Route
           path={`${props.match.path}`}
           render={() => {
@@ -40,7 +38,7 @@ const Application = (props) => {
             );
           }}
         />
-      </Switch>
+      </Switch> */}
     </React.Fragment>
   );
 };

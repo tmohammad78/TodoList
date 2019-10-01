@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import Router from "next/router";
 import "./Modal.scss";
 
 const Modal = ({
@@ -25,7 +25,7 @@ const Modal = ({
     }
   };
   const closeModal = () => {
-    Route ? history.goBack() : onClose();
+    Route ? Router.back() : onClose(); //history.push
   };
 
   return (
@@ -44,6 +44,6 @@ const Modal = ({
     </div>
   );
 };
-export default withRouter(Modal);
+export default Modal;
 
 //onClick={props.toggleModal}

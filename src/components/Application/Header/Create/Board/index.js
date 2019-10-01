@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import RadioButton from "/components/Button/RadioButton/RadioButton";
-import RadioButtonGroup from "/components/Button/RadioButton/RadioButtonGroup";
-import { validateCreate } from "/components/validation";
+import RadioButton from "../../../../Button/RadioButton/RadioButton";
+import RadioButtonGroup from "../../../../Button/RadioButton/RadioButtonGroup";
+import { validateCreate } from "../../../../Validation";
 import { Image1, Image2 } from "./InputImages";
 import "./Board.scss";
 

@@ -1,4 +1,5 @@
 import { AUTH_SUCCESS, AUTH_FAIL } from "./actionType";
+import Router from "next/router";
 import axios from "axios";
 
 export const authSuccess = (data) => ({
@@ -37,12 +38,10 @@ export const auth = (name, email, pass, history) => (dispatch, getState) => {
       )
       .then((response) => {
         if (response.status == 200) {
-          history.push("/login");
+          Router.push("/login");
         }
       })
-      .catch((error) => {
-
-      });
+      .catch((error) => {});
   } else {
     return axios
       .post(
@@ -59,7 +58,7 @@ export const auth = (name, email, pass, history) => (dispatch, getState) => {
               isAuthenticated: true
             }
           });
-          history.push("/app");
+          Router.push("/app");
         }
       })
       .catch((error) => {
