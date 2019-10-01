@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { withRouter } from "react-router-dom";
 
 import { validate } from "../../Validation";
 import { auth } from "../../../services/auth/action";
@@ -105,4 +104,4 @@ const Login = (props) => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

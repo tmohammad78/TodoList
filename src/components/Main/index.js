@@ -5,7 +5,7 @@ import second from "../../assets/second.png";
 
 import "./Main.scss";
 
-const Main = () => (
+const Main = (props) => (
   <Fragment>
     <div className="mainBox clearfix ">
       <div className="wrapper clearfix">
@@ -49,6 +49,7 @@ const Main = () => (
         </div>
       </div>
     </div>
+    <div>{props.children ? props.children : null}</div>
   </Fragment>
 );
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addStar } from "../../../../../services/board/action";
-import { Switch, Route, Link } from "react-router-dom";
 
 const Item = ({ item, route }) => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const Item = ({ item, route }) => {
       }}
       className="board-item"
     >
-      <Link to={`${item.name}`}>
+      {/* <Link to={`${item.name}`}>
         <div className="clearfix">
           <span className="board-name">{item.name}</span>
           <div className="board-details">
@@ -37,7 +36,7 @@ const Item = ({ item, route }) => {
             </span>
           </div>
         </div>
-      </Link>
+      </Link> */}
     </li>
   );
 };

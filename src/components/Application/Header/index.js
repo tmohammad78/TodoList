@@ -26,7 +26,7 @@ const Header = () => {
           <button className="btn-icon icon " onClick={handleModal}>
             <div className="icon-plus" />
           </button>
-          {toggleModal ? (
+          {/* {toggleModal ? (
             // <Modal title="create" handleModal={handleModal}>
             <Portal>
               <Modal onClose={handleModal}>
@@ -34,7 +34,7 @@ const Header = () => {
               </Modal>
             </Portal>
           ) : // </Modal>
-          null}
+          null} */}
         </div>
       </div>
     </div>

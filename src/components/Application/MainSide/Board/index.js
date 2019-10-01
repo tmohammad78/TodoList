@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "antd";
-// import 'antd/es/button/style/css';
 import Item from "./item";
 import "./Board.scss";
 

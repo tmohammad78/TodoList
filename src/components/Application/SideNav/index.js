@@ -1,6 +1,6 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
 import Button from "../../Button";
+import Link from "next/link";
 import "./SideNav.scss";
 
 const SideNav = (props) => {
@@ -9,31 +9,19 @@ const SideNav = (props) => {
       <div className="selectItems">
         <ul className="items">
           <li className="item">
-            <NavLink
-              className="btn-white"
-              activeClassName="selected"
-              to={`${props.match.path}/board`}
-            >
-              Board
-            </NavLink>
-            <NavLink
-              className="btn-white"
-              activeClassName="selected"
-              to={`${props.match.path}/today`}
-            >
-              Today
-            </NavLink>
-            <NavLink
-              className="btn-white"
-              activeClassName="selected"
-              to={`${props.match.path}/home`}
-            >
-              Home
-            </NavLink>
+            <Link href="app/board">
+              <a>Board</a>
+            </Link>
+            <Link href="app/today">
+              <a>Today</a>
+            </Link>
+            <Link href="app/home">
+              <a>Home</a>
+            </Link>
           </li>
         </ul>
       </div>
     </div>
   );
 };
-export default withRouter(SideNav);
+export default SideNav;
