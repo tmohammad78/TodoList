@@ -7,25 +7,28 @@ const initialState = {
       image: null
     }
   ],
-  starBoard: []
+  starBoard: [],
+  object: []
 };
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOARD: {
       return {
-        board: [
-          ...state.board,
-          {
-            name: action.payload.boardName,
-            image: action.payload.image
-          }
-        ]
+        // board: [
+        //   ...state.board,
+        //   {
+        //     name: action.payload.boardName,
+        //     image: action.payload.image
+        //   }
+        // ]
+        ...state,
+        object: { ...action.payload.object, ...state.object }
       };
     }
     case ADD_STAR: {
       return {
         ...state,
-        starBoard: [action.items,...state.starBoard]
+        starBoard: [action.items, ...state.starBoard]
       };
     }
     default:

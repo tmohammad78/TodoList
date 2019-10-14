@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
 import { addStar } from "../../../../../services/board/action";
 import { Switch, Route, Link } from "react-router-dom";
 
 const Item = ({ item, route }) => {
   const dispatch = useDispatch();
-  const [star, setStar] = useState(false);
+  const [saved, setSaved] = useState(false);
   const handleStarBoard = () => {
-    setStar((prevState) => {
+    console.log(item);
+    item.saved = true;
+    console.log(item);
+
+    setSaved((prevState) => {
       return !prevState;
     });
-    dispatch(addStar(item));
+    dispatch(addStar(item, setSaved));
   };
+
   return (
     <li
       className="board-item"
@@ -22,11 +29,11 @@ const Item = ({ item, route }) => {
     >
       <Link to={`${item.name}`}>
         <div className="clearfix">
-          <span className="board-name">{item.name}</span>
+          <span className="board-name">{item.title}</span>
           <div className="board-details">
             <span className="star-icon">
               <button
-                className={"btn-" + `${star ? "save" : ""}`}
+                className={"btn-" + `${saved ? "save" : ""}`}
                 style={{
                   padding: "7px 0px"
                 }}

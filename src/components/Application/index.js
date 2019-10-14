@@ -10,6 +10,7 @@ import "./Application.scss";
 
 const Application = (props) => {
   const boardName = useSelector((state) => state.board.board);
+
   return (
     <React.Fragment>
       <div>
